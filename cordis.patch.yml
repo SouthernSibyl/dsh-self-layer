@@ -1,0 +1,19 @@
+# dsh-self-layer 挂载片段：往 profile 的插件名单里插一行。
+# 这一行同时挂上两侧：宿主侧（SELF/MEMORY 读写 + /api/self-layer/* 路由）
+# 与浏览器侧（设置 → 自我层 页面，由本包的 lib/client.js 提供）。
+#
+# 下面三个 config 都可省略，省略即用括号里的默认值。
+# 改完需要重启 DSH（插件配置在启动时读取）。
+- insert:
+    - id: dsh-self-layer
+      name: dsh-self-layer
+      config:
+        # 自我层数据目录。留空 = 读 $SOUL_HOME，再退到 ~/.agent-self。
+        # 支持 ~ 与相对路径（相对进程工作目录）。
+        dataDir: ''
+        # 每个文件保留多少份历史备份（SELF.md / MEMORY.md / AGENTS.md 各自计算）。
+        # 按「份数」保留，不按天数；范围 1..365。
+        backupKeep: 30
+        # 是否在 AGENTS.md 里维护「先读 SELF.md」的常驻指针块。
+        # 关掉后宿主不再改写 AGENTS.md，页面上也不显示指针卡。
+        pointer: true

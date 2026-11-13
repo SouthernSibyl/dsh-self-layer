@@ -1,0 +1,92 @@
+{
+  "name": "dsh-self-layer",
+  "version": "1.0.0",
+  "description": "A self-layer for DSH: edit your agent's name, persona, rules and cross-session memory as plain Markdown, with versioned backups and an AGENTS.md boot pointer.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "README.en.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "templates",
+    "test"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "typecheck": "node node_modules/typescript/bin/tsc --noEmit",
+    "pack:check": "node scripts/check-pack.mjs",
+    "prepublishOnly": "npm test",
+    "verify": "npm test && npm run typecheck && npm run pack:check"
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "plugin",
+    "soul",
+    "persona",
+    "personality",
+    "system-prompt",
+    "long-term-memory",
+    "settings",
+    "web-ui",
+    "markdown"
+  ],
+  "author": "SouthernSibyl",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SouthernSibyl/dsh-self-layer.git"
+  },
+  "homepage": "https://github.com/SouthernSibyl/dsh-self-layer#readme",
+  "bugs": {
+    "url": "https://github.com/SouthernSibyl/dsh-self-layer/issues"
+  },
+  "engines": {
+    "node": ">=22",
+    "dsh": ">=0.2.2-rc.1 <0.3.0-0"
+  },
+  "os": [
+    "win32",
+    "darwin",
+    "linux"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-slots"
+      ]
+    },
+    "compatibility": {
+      "dshReleases": {
+        "0.2.2-rc.1": "compatible"
+      }
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1-rc.1",
+    "@deepseek-ai/dsh": ">=0.2.2-rc.1 <0.3.0-0",
+    "react": "^18.3.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "@types/react": "^18.3.31",
+    "typescript": "^7.0.2"
+  }
+}
